@@ -1,0 +1,123 @@
+<p>hour works!</p>
+
+
+<div class="container">  
+  
+    <mat-card>  
+      <mat-toolbar color="accent">  
+        <div align="center" style="color:white;text-align: right;">  
+         Login Details 
+        </div>    
+      </mat-toolbar>  
+    <br><br>  
+      <mat-card-content>  
+        <!-- <form [formGroup]="userForm"(ngSubmit)="onFormSubmit(userForm.value)">   -->
+            <form [formGroup]="loginForm">
+                <table>  
+                  <tr>  
+                    <td class="tbl1">  
+                      <mat-form-field class="demo-full-width">  
+                        <input formControlName="UserId" matTooltip="Enter UserId" matInput placeholder="UserId">  
+                      </mat-form-field>  
+                      <mat-error>  
+                        <span *ngIf="!loginForm.get('UserId').value && loginForm.get('UserId').touched"></span>  
+                      </mat-error>  
+                    </td>  
+                    <td class="tbl1">  
+                        <mat-form-field class="demo-full-width">  
+                          <input formControlName="SessionId" matTooltip="Enter SessionId" matInput placeholder="SessionId">  
+                        </mat-form-field>  
+                        <mat-error>  
+                          <span *ngIf="!loginForm.get('SessionId').value && loginForm.get('SessionId').touched"></span>  
+                        </mat-error>  
+                      </td>  
+                   
+                    <td class="tbl1">  
+                      <mat-form-field class="demo-full-width">  
+                        <input formControlName="IPAddress" matTooltip="Enter IPAddress" matInput placeholder="IPAddress">  
+                      </mat-form-field>  
+                      <mat-error>  
+                        <span *ngIf="!loginForm.get('IPAddress').value && loginForm.get('IPAddress').touched"></span>  
+                      </mat-error>  
+                    </td>  
+                  </tr>  
+                  <tr>  
+                    <td class="tbl1">  
+                        <mat-form-field class="demo-full-width">  
+                          <input matInput [matDatepicker]="picker"matTooltip="Enter LoginAt" formControlName="LoginAt"placeholder="Choose LoginAt">  
+                          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>  
+                          <mat-datepicker #picker></mat-datepicker>  
+                        </mat-form-field>  
+                        <mat-error>  
+                          <span *ngIf="!loginForm.get('LoginAt').value && loginForm.get('LoginAt').touched"></span>  
+                        </mat-error>  
+                      </td>
+
+                      <td class="tbl1">  
+                        <mat-form-field class="demo-full-width">  
+                          <input matInput [matDatepicker]="picker"matTooltip="Enter LogoutAt" formControlName="LogoutAt"placeholder="Choose LogoutAt">  
+                          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>  
+                          <mat-datepicker #picker></mat-datepicker>  
+                        </mat-form-field>  
+                        <mat-error>  
+                          <span *ngIf="!loginForm.get('LogoutAt').value && loginForm.get('LogoutAt').touched"></span>  
+                        </mat-error>  
+                      </td>
+                  </tr>
+                  <tr> 
+                    <td class="tbl1">  
+                        <mat-form-field class="demo-full-width">  
+                          <input formControlName="LoginStatus" matTooltip="Enter LoginStatus" matInput placeholder="LoginStatus">  
+                        </mat-form-field>  
+                        <mat-error>  
+                          <span *ngIf="!loginForm.get('LoginStatus').value && loginForm.get('LoginStatus').touched"></span>  
+                        </mat-error>  
+                      </td>  
+                   
+                  </tr>  
+                  <tr>  
+                    <td></td>  
+                    <td  class="content-center">  
+                      <button type="submit" mat-raised-button color="accent"matTooltip="Click Submit Button"[disabled]="!loginForm.valid" (click)="submitForm()">Submit</button>      
+                      <button type="reset" mat-raised-button color="accent"matTooltip="Click Reset Button" (click)="resetForm()">Reset</button>  
+                    </td>  
+                    <td>  
+                      <p *ngIf="dataSaved" style="color:rgb(0, 128, 0);font-size:20px;font-weight:bold" Class="success" align="left">  
+                        {{massage}}  
+                      </p>  
+                    </td>  
+                  </tr>  
+                </table>  
+    <br><br>  
+          <table class="table" >  
+              <tr ngclass="btn-primary">  
+                <th class="tbl2">UserId</th>  
+                <th class="tbl2">SessionId</th>  
+                <th class="tbl2">IPAddress</th>  
+                <th class="tbl2">LoginAt</th>  
+                <th class="tbl2">LogoutAt</th>  
+                <th class="tbl2">LoginStatus</th>  
+                <th class="tbl2">Edit</th>  
+                <th class="tbl2">Delete</th>  
+              </tr>  
+              <tr *ngFor="let login of allLogins | async">  
+                <td class="tbl2">{{login.UserId}}</td>  
+                <td class="tbl2">{{login.SessionId}}</td> 
+                <td class="tbl2">{{login.IPAddress}}</td> 
+                <td class="tbl2">{{login.LoginAt | date }}</td>  
+                <td class="tbl2">{{login.LogoutAt | date }}</td> 
+                <td class="tbl2">{{login.LoginStatus}}</td>  
+                <td class="tbl2">  
+                  <button type="button" class="btn btn-info"matTooltip="Click Edit Button"(click)="loadLoginToEdit(login.AuditId)">Edit</button>  
+                </td>  
+                <td class="tbl2">  
+                  <button type="button" class="btn btn-danger"matTooltip="Click Delete Button"(click)="deleteLog(login.AuditId)">Delete</button>  
+                </td>  
+              </tr>  
+      
+            </table>  
+        </form>  
+      </mat-card-content>  
+    </mat-card>  
+    </div>  
+
