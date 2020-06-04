@@ -1,0 +1,99 @@
+<p>project works!</p>
+
+
+<div class="container">
+
+    <mat-card>
+        <mat-toolbar color="accent">
+            <div align="center" style="color:white;text-align: right;">
+                Project Creation And Details
+            </div>
+        </mat-toolbar>
+        <br><br>
+        <mat-card-content>
+            <!-- <form [formGroup]="userForm"(ngSubmit)="onFormSubmit(userForm.value)">   -->
+            <form [formGroup]="projectForm">
+                <table>
+                    <tr>
+                        <td class="tbl1">
+                            <mat-form-field class="demo-full-width">
+                                <input formControlName="ProjectCode" matTooltip="Enter ProjectCode" matInput
+                                    placeholder="ProjectCode">
+                            </mat-form-field>
+                            <mat-error>
+                                <span
+                                    *ngIf="!projectForm.get('ProjectCode').value && projectForm.get('ProjectCode').touched"></span>
+                            </mat-error>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="tbl1">
+                            <mat-form-field class="demo-full-width">
+                                <input formControlName="ProjectName" matTooltip="Enter ProjectName" matInput
+                                    placeholder="ProjectName">
+                            </mat-form-field>
+                            <mat-error>
+                                <span
+                                    *ngIf="!projectForm.get('ProjectName').value && projectForm.get('ProjectName').touched"></span>
+                            </mat-error>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="tbl1">
+                            <mat-form-field class="demo-full-width">
+                                <input formControlName="NameOfIndustry" matTooltip="Enter NameOfIndustry" matInput
+                                    placeholder="NameOfIndustry">
+                            </mat-form-field>
+                            <mat-error>
+                                <span
+                                    *ngIf="!projectForm.get('NameOfIndustry').value && projectForm.get('NameOfIndustry').touched"></span>
+                            </mat-error>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td></td>
+                        <td class="content-center">
+                            <button type="submit" mat-raised-button color="accent" matTooltip="Click Submit Button"
+                                [disabled]="!projectForm.valid" (click)="submitForm()">Submit</button>
+                            <button type="reset" mat-raised-button color="accent" matTooltip="Click Reset Button"
+                                (click)="resetForm()">Reset</button>
+                        </td>
+                        <td>
+                            <p *ngIf="dataSaved" style="color:rgb(0, 128, 0);font-size:20px;font-weight:bold"
+                                Class="success" align="left">
+                                {{massage}}
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+                <br><br>
+                <table class="table">
+                    <tr ngclass="btn-primary">
+                        <th class="tbl2">ProjectCode</th>
+                        <th class="tbl2">ProjectName</th>
+                        <th class="tbl2">NameOfIndustry</th>
+                        <th class="tbl2">Edit</th>
+                        <th class="tbl2">Delete</th>
+                    </tr>
+                    <tr *ngFor="let project of allProjects | async">
+                        <td class="tbl2">{{project.ProjectCode}}</td>
+                        <td class="tbl2">{{project.ProjectName}}</td>
+                        <td class="tbl2">{{project.NameOfIndustry}}</td>
+                        <td class="tbl2">
+                            <button type="button" class="btn btn-info" matTooltip="Click Edit Button"
+                                (click)="loadProjectToEdit(project.ProjectId)">Edit</button>
+                        </td>
+                        <td class="tbl2">
+                            <button type="button" class="btn btn-danger" matTooltip="Click Delete Button"
+                                (click)="deleteProject(project.ProjectId)">Delete</button>
+                        </td>
+                    </tr>
+
+                </table>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>

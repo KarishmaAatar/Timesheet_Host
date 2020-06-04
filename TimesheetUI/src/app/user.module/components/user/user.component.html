@@ -1,0 +1,140 @@
+<p>user works!</p>
+
+
+<div class="container">  
+  
+    <mat-card>  
+      <mat-toolbar color="accent">  
+        <div align="center" style="color:white;text-align: right;">  
+         User Creation 
+        </div>    
+      </mat-toolbar>  
+    <br><br>  
+      <mat-card-content>  
+        <!-- <form [formGroup]="userForm"(ngSubmit)="onFormSubmit(userForm.value)">   -->
+            <form [formGroup]="userForm">
+                <table>  
+                  <tr>  
+                    <td class="tbl1">  
+                      <mat-form-field class="demo-full-width">  
+                        <input formControlName="Name" matTooltip="Enter Name" matInput placeholder="Name">  
+                      </mat-form-field>  
+                      <mat-error>  
+                        <span *ngIf="!userForm.get('Name').value && userForm.get('Name').touched"></span>  
+                      </mat-error>  
+                    </td>  
+                    <td class="tbl1">  
+                        <mat-form-field class="demo-full-width">  
+                          <input formControlName="MobileNo" matTooltip="Enter MobileNo" matInput placeholder="MobileNo">  
+                        </mat-form-field>  
+                        <mat-error>  
+                          <span *ngIf="!userForm.get('MobileNo').value && userForm.get('MobileNo').touched"></span>  
+                        </mat-error>  
+                      </td>  
+                   
+                    <td class="tbl1">  
+                      <mat-form-field class="demo-full-width">  
+                        <input formControlName="EmailID" matTooltip="Enter EmailID" matInput placeholder="EmailID">  
+                      </mat-form-field>  
+                      <mat-error>  
+                        <span *ngIf="!userForm.get('EmailID').value && userForm.get('EmailID').touched"></span>  
+                      </mat-error>  
+                    </td>  
+                  </tr>  
+                  <tr>  
+                    <td class="tbl1">  
+                      <span>Gender</span>  
+                      <br><br>  
+                      <mat-radio-group matTooltip="Enter Gender"formControlName="Gender">  
+                          <mat-radio-button value="0">Male</mat-radio-button>    
+                          <mat-radio-button value="1">Female</mat-radio-button>  
+                        </mat-radio-group>  
+                      <mat-error>  
+                        <span *ngIf="!userForm.get('Gender').value && userForm.get('Gender').touched"></span>  
+                      </mat-error>  
+                    </td>  
+                    <td class="tbl1">  
+                        <mat-form-field class="demo-full-width">  
+                          <input matInput [matDatepicker]="picker"matTooltip="Enter Date Of Joining" formControlName="DateOfJoining"placeholder="Choose Date Of Joining">  
+                          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>  
+                          <mat-datepicker #picker></mat-datepicker>  
+                        </mat-form-field>  
+                        <mat-error>  
+                          <span *ngIf="!userForm.get('DateOfJoining').value && userForm.get('DateOfJoining').touched"></span>  
+                        </mat-error>  
+                      </td>
+                  </tr>
+                  <tr> 
+                    <td class="tbl1">  
+                        <mat-form-field class="demo-full-width">  
+                          <input formControlName="Username" matTooltip="Enter UserName" matInput placeholder="UserName">  
+                        </mat-form-field>  
+                        <mat-error>  
+                          <span *ngIf="!userForm.get('Username').value && userForm.get('Username').touched"></span>  
+                        </mat-error>  
+                      </td>  
+                    <td class="tbl1">  
+                      <mat-form-field class="demo-full-width">  
+                        <input matTooltip="Enter Password"formControlName="Password" matInput placeholder="Password">  
+                      </mat-form-field>  
+                      <mat-error>  
+                        <span *ngIf="!userForm.get('Password').value && userForm.get('Password').touched"></span>  
+                      </mat-error>  
+                    </td>  
+                    <td class="tbl1">  
+                      <mat-form-field class="demo-full-width">  
+                        <input formControlName="ConfirmPassword" matTooltip="Enter ConfirmPassword" matInput placeholder="ConfirmPassword">  
+                      </mat-form-field>  
+                      <mat-error>  
+                        <span *ngIf="!userForm.get('ConfirmPassword').value && userForm.get('ConfirmPassword').touched"></span>  
+                      </mat-error>  
+                    </td>  
+                  </tr>  
+                  <tr>  
+                    <td></td>  
+                    <td  class="content-center">  
+                      <button type="submit" mat-raised-button color="accent"matTooltip="Click Submit Button"[disabled]="!userForm.valid" (click)="submitForm()">Submit</button>      
+                      <button type="reset" mat-raised-button color="accent"matTooltip="Click Reset Button" (click)="resetForm()">Reset</button>  
+                    </td>  
+                    <td>  
+                      <p *ngIf="dataSaved" style="color:rgb(0, 128, 0);font-size:20px;font-weight:bold" Class="success" align="left">  
+                        {{massage}}  
+                      </p>  
+                    </td>  
+                  </tr>  
+                </table>  
+    <br><br>  
+          <table class="table" >  
+              <tr ngclass="btn-primary">  
+                <th class="tbl2">Name</th>  
+                <th class="tbl2">Date Of Joining</th>  
+                <th class="tbl2">Email ID</th>  
+                <th class="tbl2">Gender</th>  
+                <th class="tbl2">UserName</th>  
+                <th class="tbl2">Password</th>  
+                <th class="tbl2">ConfirmPassword</th>  
+                <th class="tbl2">Edit</th>  
+                <th class="tbl2">Delete</th>  
+              </tr>  
+              <tr *ngFor="let user of allUsers | async">  
+                <td class="tbl2">{{user.Name}}</td>  
+                <td class="tbl2">{{user.DateOfJoining | date }}</td>  
+                <td class="tbl2">{{user.EmailID}}</td>  
+                <td class="tbl2">{{user.Gender ==0? 'Male' : 'Female'}}</td> 
+                <td class="tbl2">{{user.Username}}</td> 
+                <td class="tbl2">{{user.Password}}</td>  
+                <td class="tbl2">{{user.ConfirmPassword}}</td>
+                <td class="tbl2">  
+                  <button type="button" class="btn btn-info"matTooltip="Click Edit Button"(click)="loadUserToEdit(user.UserId)">Edit</button>  
+                </td>  
+                <td class="tbl2">  
+                  <button type="button" class="btn btn-danger"matTooltip="Click Delete Button"(click)="deleteUser(user.UserId)">Delete</button>  
+                </td>  
+              </tr>  
+      
+            </table>  
+        </form>  
+      </mat-card-content>  
+    </mat-card>  
+    </div>  
+
